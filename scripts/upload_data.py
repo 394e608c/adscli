@@ -1,9 +1,8 @@
-import click
 import configparser
-import requests
 import logging
-import urllib
 import json
+import requests
+import click
 import csv
 
 # logging for debugging outbound requests
@@ -23,7 +22,7 @@ GRANT_TYPE = CONFIG.get('CONFIG', 'grant_type')
 # returns bearer token [expires in 3600s]
 def get_token():
   endpoint = 'https://api.omniture.com/token'
-  body = {"client_id": CLIENT_ID, "client_secret": CLIENT_SECRET, "grant_type": GRANT_TYPE}
+  body = {'client_id': CLIENT_ID, 'client_secret': CLIENT_SECRET, 'grant_type': GRANT_TYPE}
   
   r = requests.post(endpoint, data=body)
 
@@ -44,6 +43,7 @@ def process_file(file):
     reader = csv.reader(f)
     for record in reader:
       yield json.dumps(record)
+  f.close()
 
 # args for our CLI
 @click.command()
@@ -68,6 +68,7 @@ def upload_file(job_name, cols, file, dsid, rsid):
   # parse csv and comma delimit the fields
   records = process_file(file)
   rows = ','.join(str(a) for a in records)
+  print(rows)
   
   # format keys/values for POST body
   c = '"{}"'.format("columns")
@@ -91,9 +92,6 @@ def upload_file(job_name, cols, file, dsid, rsid):
   endpoint = 'https://api.omniture.com/admin/1.4/rest/?method=DataSources.UploadData'
   headers = {"Authorization":"Bearer "+token, "Content-Type":"application/json"}
   
-  # dsid 22 for testing, 'Date,Event 125,Evar 100,Event 126,Event 124,Tracking Code'
-  #post_body = {"columns":col_headers,"dataSourceID":dsid,"finished":"true","jobName":job_name,"reportSuiteID":rsid,"rows":rows}
-
   # confirm before initiating the request
   confirm_msg = click.style('Data is formatted and ready to load. Would you like to proceed?', fg='red')
   click.confirm(confirm_msg, abort=True)

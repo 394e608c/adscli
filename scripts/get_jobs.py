@@ -21,7 +21,7 @@ GRANT_TYPE = CONFIG.get('CONFIG', 'grant_type')
 # returns bearer token [expires in 3600s]
 def get_token():
   endpoint = 'https://api.omniture.com/token'
-  body = {"client_id": CLIENT_ID, "client_secret": CLIENT_SECRET, "grant_type": GRANT_TYPE}
+  body = {'client_id': CLIENT_ID, 'client_secret': CLIENT_SECRET, 'grant_type': GRANT_TYPE}
 
   r = requests.post(endpoint, data=body)
 
@@ -40,7 +40,6 @@ def get_token():
 @click.command()
 @click.option('--dsid', required=True, help='The dataSourceID')
 @click.option('--rsid', required=True, help='The report suite ID')
-#@click.option('--pp', help='Pretty print response JSON')
 
 # takes input from CLI and makes the request
 def get_jobs(dsid, rsid):

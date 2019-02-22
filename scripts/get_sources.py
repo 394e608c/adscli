@@ -21,7 +21,7 @@ GRANT_TYPE = CONFIG.get('CONFIG', 'grant_type')
 # returns bearer token [expires in 3600s]
 def get_token():
   endpoint = 'https://api.omniture.com/token'
-  body = {"client_id": CLIENT_ID, "client_secret": CLIENT_SECRET, "grant_type": GRANT_TYPE}
+  body = {'client_id': CLIENT_ID, 'client_secret': CLIENT_SECRET, 'grant_type': GRANT_TYPE}
   
   r = requests.post(endpoint, data=body)
 

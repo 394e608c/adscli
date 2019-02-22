@@ -53,7 +53,7 @@ grant_type = client_credentials
 ## DataSources.Get
 Returns list of data sources. Simply pass in a reposrt suite ID with --rsid.
 
-#### Usage:
+**Usage:**
 ```
 $ python get_sources.py --rsid=mytestreportsuite
 ```
@@ -88,7 +88,8 @@ Options:
 
 ## DataSources.Delete
 Deletes a given data source. Pass in report suite ID (--rsid) and a data soure ID to delete (--dsid)
-#### Usage:
+
+**Usage:**
 ```
 $ python delete_source.py --rsid=mytestreportsuite --dsid=2
 ```
@@ -114,7 +115,7 @@ Data source 2 successfully deleted
 ## DataSources.GetJobs
 Returns a list of every job run for a particular data source. Pass in report suite ID (--rsid) and a data soure ID (--dsid)
 
-#### Usage:
+**Usage:**
 ```
 $ python get_jobs.py --rsid=mytestreportsuite --dsid=2
 ```
@@ -148,15 +149,15 @@ Options:
 ```
 
 ## DataSources.UploadData
-Uploads data to a particular data source. Per usual, pass in a report suite ID (--rsid) and a data soure ID (--dsid).Additional required fields:
+Uploads data to a particular data source. Per usual, pass in a report suite ID (--rsid) and a data soure ID (--dsid). Additional required fields:
 
 * --job-name: A name for the job (will be used in the fileName field in the response from GetJobs)
 * --file: The path of a valid CSV with your data to load (no column headers)
-* --cols: A comma delimited list (wrapped in quotes) of columns which should match the column names of you data source. Example: 'Event 1,Event 5,Evar 20'
+* --cols: A comma delimited list (wrapped in quotes) of columns which should match the column names of your data source. Example: 'Event 1,Event 5,Evar 20'
 
 **Important**: The order of column headers passed with --cols MUST match the order of the columns in your CSV to load. If --cols='Event 1,Event 5,Evar 20', then your CSV should have event1 in col A, event5 in col B and evar20 in col C.
 
-#### Usage:
+**Usage:**
 ```
 $ python upload_data.py --rsid=mytestreportsuite --dsid=2 --columns=Event 1,Evar 30 --file=file_to_load.csv --job-name=test
 ```
