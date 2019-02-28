@@ -152,22 +152,22 @@ Options:
 Uploads data to a particular data source. Per usual, pass in a report suite ID (--rsid) and a data soure ID (--dsid). Additional required fields:
 
 * --job-name: A name for the job (will be used in the fileName field in the response from GetJobs)
-* --file: The path of a valid CSV with your data to load (no column headers)
+* --file: The path of a valid CSV with your data to load (no column headers). Make sure to move the csv into the scripts directory
 * --cols: A comma delimited list (wrapped in quotes) of columns which should match the column names of your data source. Example: 'Event 1,Event 5,Evar 20'
 
 **Important**: The order of column headers passed with --cols MUST match the order of the columns in your CSV to load. If --cols='Event 1,Event 5,Evar 20', then your CSV should have event1 in col A, event5 in col B and evar20 in col C.
 
 **Usage:**
 ```
-$ python upload_data.py --rsid=mytestreportsuite --dsid=2 --columns=Event 1,Evar 30 --file=file_to_load.csv --job-name=test
+$ python upload_data.py --rsid=mytestreportsuite --dsid=2 --columns='Event 1,Evar 30' --file=file_to_load.csv --job-name=test
 ```
 
 ```
 python upload_data.py --help
 
   --job-name TEXT  A name for the job  [required]
-  --cols TEXT      Provide a column delimited list of column names (Ex: 'Evar 1,Event 1')  [required]
-  --file TEXT      Provide the path for a CSV  [required]
+  --cols TEXT      Column delimited list of column names (Ex: 'Evar 1,Event 1')  [required]
+  --file TEXT      The path for the CSV to load [required]
   --dsid TEXT      The dataSourceID  [required]
   --rsid TEXT      The report suite ID  [required]
   --help           Show this message and exit.
