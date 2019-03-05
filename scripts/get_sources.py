@@ -5,11 +5,13 @@ import requests
 import click
 
 # logging for debugging outbound requests
+'''
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 REQUESTS_LOG = logging.getLogger("requests.packages.urllib3")
 REQUESTS_LOG.setLevel(logging.DEBUG)
 REQUESTS_LOG.propagate = True
+'''
 
 # read in auth parameters from config
 CONFIG = configparser.ConfigParser()
@@ -50,11 +52,11 @@ def get_sources(rsid):
   else:
     click.echo(click.style('Successfully retrieved Bearer token', fg='green'))
 
-  delete_jobs_endpoint = 'https://api.omniture.com/admin/1.4/rest/?method=DataSources.Get'
+  endpoint = 'https://api.omniture.com/admin/1.4/rest/?method=DataSources.Get'
   post_body = {"reportSuiteID":rsid}
   headers = {"Authorization":"Bearer "+token, "Content-Type":"application/json"}
 
-  r = requests.post(delete_jobs_endpoint, json=post_body, headers=headers)
+  r = requests.post(endpoint, json=post_body, headers=headers)
 
   json_resp = r.json()
   output = json.dumps(json_resp, indent=2)

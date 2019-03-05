@@ -5,11 +5,13 @@ import requests
 import click
 
 # logging for debugging outbound requests
+'''
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 REQUESTS_LOG = logging.getLogger("requests.packages.urllib3")
 REQUESTS_LOG.setLevel(logging.DEBUG)
 REQUESTS_LOG.propagate = True
+'''
 
 # read in auth parameters from config
 CONFIG = configparser.ConfigParser()
@@ -63,12 +65,13 @@ def get_jobs(dsid, rsid):
 
   status_code = r.status_code
 
-  if status_code == 400:
-    click.echo(click.style('error returning jobs for dataSourceID: %s' % dsid, fg='red'))
-    click.echo(output)
-  else:
+  if status_code == 200:
     click.echo(output)
     click.echo(click.style('%s jobs found for dataSourceID %s' % (count, dsid), fg='green'))
+  else:
+    click.echo(click.style('error returning jobs for dataSourceID: %s' % dsid, fg='red'))
+    click.echo(output)
 
 if __name__ == '__main__':
   get_jobs()
+  

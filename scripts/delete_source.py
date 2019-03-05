@@ -5,11 +5,13 @@ import requests
 import click
 
 # logging for debugging outbound requests
+'''
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 REQUESTS_LOG = logging.getLogger("requests.packages.urllib3")
 REQUESTS_LOG.setLevel(logging.DEBUG)
 REQUESTS_LOG.propagate = True
+'''
 
 # read in auth parameters from config
 CONFIG = configparser.ConfigParser()

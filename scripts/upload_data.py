@@ -6,11 +6,13 @@ import click
 import csv
 
 # logging for debugging outbound requests
+'''
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 REQUESTS_LOG = logging.getLogger("requests.packages.urllib3")
 REQUESTS_LOG.setLevel(logging.DEBUG)
 REQUESTS_LOG.propagate = True
+'''
 
 # read in auth parameters from config
 CONFIG = configparser.ConfigParser()
@@ -68,7 +70,6 @@ def upload_file(job_name, cols, file, dsid, rsid):
   # parse csv and comma delimit the fields
   records = process_file(file)
   rows = ','.join(str(a) for a in records)
-  print(rows)
   
   # format keys/values for POST body
   c = '"{}"'.format("columns")
